@@ -1314,10 +1314,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     <h3 id="dailyGuidePrompt"></h3>
     <textarea id="dailyGuideResponse" placeholder="A sentence is enough. A word is enough."></textarea>
     <div class="guide-footer-actions">
-      <button class="primary-action" onclick="saveDailyGuide()">Save My Reflection</button>
+      <button class="primary-action" id="saveReflectionBtn" onclick="saveDailyGuide()">Save My Reflection</button>
       <button class="secondary-action" onclick="showTodayActiveSpaces()">Open One of My Spaces</button>
       <button class="secondary-action" onclick="showShellPage('today')">That’s Enough for Today</button>
     </div>
+    <p id="saveReflectionConfirm" style="font-size:11px;color:#C16B62;margin-top:10px;min-height:14px;opacity:0;transition:opacity .3s"></p>
   </div>
 </section>
 
@@ -1325,9 +1326,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   <div class="myspaces-hero">
     <div class="eyebrow">My Spaces</div>
     <h1>Your Soft Life, shaped around this season.</h1>
-    <p>Keep up to three spaces active at once. Everything else stays available in the library without asking for your attention every day. Click any selected Space to remove it or choose a different one.</p>
+    <p>We suggest about three in focus at a time to keep things from feeling like too much — but every Space stays open to you, always. Click any selected Space to remove it, or add more whenever you want.</p>
   </div>
   <div class="space-picker-grid" id="spacePickerGrid"></div>
+  <p style="text-align:center;font-size:12px;color:#a98884;margin-top:-14px;margin-bottom:20px">Purpose &amp; Career, Home &amp; Heart, Body &amp; Temple, and Financial Flow also live together on <a href="#" onclick="openSoftLifeMapOverview();return false" style="color:#C16B62">the Soft Life Map →</a></p>
   <div class="selection-footer">
     <div class="selection-count" id="spaceSelectionCount">0 of 3 spaces active</div>
     <div><button class="secondary-action" onclick="resetSpaceChoices()">Reset</button> <button class="primary-action" onclick="saveSpaceChoices()">Save My Spaces</button></div>
@@ -1533,6 +1535,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   </div>
 
   <div class="creator-grid">
+    <div style="grid-column:1/-1;text-align:center;padding:6px 0 4px">
+      <div class="eyebrow" style="color:#C16B62">Phase 1 · Plan</div>
+    </div>
     <section class="creator-panel wide">
       <div class="eyebrow">01 · Weekly Direction</div><h3>This Week’s Pillars</h3>
       <p>Choose 2–3 themes that reflect what you want your audience to feel, learn or experience this week.</p>
@@ -1596,10 +1601,14 @@ document.addEventListener("DOMContentLoaded", async () => {
       </div>
     </section>
 
+    <div style="grid-column:1/-1;text-align:center;padding:22px 0 4px">
+      <div class="eyebrow" style="color:#C16B62">Phase 2 · Create</div>
+    </div>
     <section class="creator-panel wide">
       <div class="eyebrow">06 · Production Studio</div><h3>Content Production Pipeline</h3>
       <p>Capture messy ideas and move them through development without losing the original spark.</p>
       <div class="pipeline" id="creatorPipeline"></div>
+      <p id="studioSendConfirm" style="font-size:11px;color:#C16B62;margin:4px 0 0;min-height:14px;opacity:0;transition:opacity .3s"></p>
       <div class="cc-form">
         <input id="ideaTitle" placeholder="Raw content idea">
         <select id="ideaPlatform"><option>Instagram</option><option>TikTok</option><option>YouTube</option><option>Email</option><option>Multi-platform</option></select>
@@ -1662,9 +1671,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       </div>
     </section>
 
+    <div style="grid-column:1/-1;text-align:center;padding:22px 0 4px">
+      <div class="eyebrow" style="color:#C16B62">Phase 3 · Polish &amp; Post</div>
+    </div>
     <section class="creator-panel wide">
-      <div class="eyebrow">11 · Polish</div><h3>Final Edits & Touch-Ups</h3>
-      <p>Use a short quality check before content moves to Ready for Posting.</p>
+      <div class="eyebrow">11 · Polish</div><h3>Final Edits &amp; Touch-Ups</h3>
+      <p>A fresh checklist for each piece sitting in Final Edit — check everything off to unlock "Mark Ready."</p>
       <div class="check-grid" id="editChecklist"></div>
     </section>
 
@@ -1674,6 +1686,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       <div class="cc-list" id="readyList"></div>
     </section>
 
+    <div style="grid-column:1/-1;text-align:center;padding:22px 0 4px">
+      <div class="eyebrow" style="color:#C16B62">Phase 4 · Engage &amp; Learn</div>
+    </div>
     <section class="creator-panel">
       <div class="eyebrow">13 · Warm Touch Zone</div><h3>Engagement + Community</h3>
       <p>Track the relationship work around your content: replies, thoughtful comments, DMs and collab follow-ups.</p>
@@ -1788,14 +1803,18 @@ document.addEventListener("DOMContentLoaded", async () => {
       </div>
     </section>
 
+    <div style="grid-column:1/-1;text-align:center;padding:22px 0 6px">
+      <div class="eyebrow" style="color:#C16B62">Whenever you need it</div>
+      <p style="font-size:11px;color:#a98884;margin-top:4px">A different rhythm than the tools above — dip in occasionally, no sequence to follow.</p>
+    </div>
     <section class="integration-panel wide">
-      <div class="eyebrow">05 · Gentle Greenhouse</div><h3>Seasonal Intentions</h3>
+      <div class="eyebrow">Toolbox</div><h3>Seasonal Intentions</h3>
       <p>Zoom out from daily urgency. What do you want to cultivate, protect, experience or release in this season?</p>
       <div class="season-board" id="seasonBoard"></div>
     </section>
 
     <section class="integration-panel wide">
-      <div class="eyebrow">06 · Sacred Library</div><h3>Resources & Learning</h3>
+      <div class="eyebrow">Toolbox</div><h3>Resources &amp; Learning</h3>
       <p>Books, podcasts, classes, videos, articles, screenshots, PDFs, quotes and lessons that made you pause, reflect or feel more alive.</p>
       <div class="library-grid" id="libraryGrid"></div>
       <div class="il-form">
@@ -1831,6 +1850,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         <div class="identity-side"><h4>Who I’m becoming</h4><textarea id="identityAfter" class="field" placeholder="The version of me I’m practicing now..."></textarea></div>
       </div>
       <button class="pill" style="margin-top:12px" onclick="saveIdentityBridge()">Save Identity Reflection</button>
+      <p id="identityConfirm" style="font-size:11px;color:#C16B62;margin-top:8px;min-height:14px;opacity:0;transition:opacity .3s"></p>
       <div class="transform-timeline" id="transformTimeline"></div>
       <div class="b-form">
         <input id="transformTitle" placeholder="What shifted?">
@@ -1872,7 +1892,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     <section class="becoming-panel wide">
       <div class="eyebrow">04 · Victory Vault</div><h3>Wins & Wisdom</h3>
       <p>Big wins, tiny wins, “old me would’ve…” moments, kind words, risks, breakthroughs, and the wisdom you want available on hard days.</p>
-      <p class="scope-note"><b>This is evidence of personal evolution.</b> A finished task goes to Completed & Integrated; a moment that proves you are becoming someone new belongs here.</p>
+      <p class="scope-note"><b>This is evidence of personal evolution.</b> A finished task goes to Completed & Integrated; a broad shift in who you're becoming belongs in your Transformation Timeline above; a specific proud moment or piece of wisdom you want to keep close belongs here.</p>
       <div class="victory-grid" id="victoryGrid"></div>
       <div class="b-form">
         <input id="winTitle" placeholder="What are you proud of?">
@@ -1984,21 +2004,21 @@ document.addEventListener("DOMContentLoaded", async () => {
 <script>
 const data={
 purpose:{title:"Purpose & Career",sub:"Your Work-Life HQ",intro:"Whether you're climbing, creating, pivoting or imagining something entirely new—this is where the big vision lives. Your work is not just a job; it can be part of your soul's expression.",mods:[
-["Weekly & Monthly Planning","Meetings, deadlines and priorities without turning your life into one endless task list."],
+["This Week's Plan","Meetings, deadlines and priorities without turning your life into one endless task list."],
 ["Vision Casting","Dream roles, ideal workdays, brands, clients and the direction your career is asking you to explore."],
 ["Brag Bank","A living record of accomplishments, praise, milestones and evidence of your growth."],
+["Emotional Check-In","Boundaries, stress mantras and reflections on what your current work is teaching you."],
 ["Personal Brand & Resume","Keep bios, resume notes, elevator pitches and professional identity material together."],
-["Workspace Inspiration","Save ideas for the environment you want to create around your work."],
-["Emotional Wellness at Work","Boundaries, stress mantras and reflections on what your current work is teaching you."]
+["Workspace Inspiration","Save ideas for the environment you want to create around your work."]
 ]},
 home:{title:"Home & Heart",sub:"The heart of the home",intro:"A sacred headquarters for the practical and emotional rhythms of home—family schedules, meals, groceries, responsibilities, rituals and the environment you're creating together.",mods:[
 ["Family Calendar","School dates, appointments, events and family rhythms."],["Meals & Grocery","Meal ideas, grocery needs and nourishing plans."],["Household Rhythm","Chores, rotating responsibilities and home resets."],["Kids & Family Activities","Schedules, activities and upcoming needs."],["Home Rituals","Family affirmations, tech-free time, wellness prompts and rituals."]
 ]},
 body:{title:"Body & Temple",sub:"Presence over perfection",intro:"Honor the physical body that carries you through this season. Move, stretch, rest, celebrate and notice how you feel—not merely what your body accomplished.",mods:[
-["Movement Menu","Choose movement by capacity: high, medium or low energy."],["Monthly Fitness Flow","A loose monthly rhythm for strength, yoga, dance, walking and rest."],["Progress & Breakthroughs","Non-scale wins, consistency, energy shifts and moments worth celebrating."],["Stretch Tracker","AM/PM stretching, saved routines and where your body feels tight today."],["Movement Vibes","Walking, yoga, mirror-dancing and sound-based movement playlists."],["Body Affirmations","Words to return to when you feel disconnected from your body."]
+["Movement Menu","Choose movement by capacity: high, medium or low energy."],["Your Weekly Rhythm","The pattern you keep, week after week — pull straight from your Movement Menu or write your own."],["Stretch Tracker","Quick, frequent check-ins — where your body feels tight today."],["Progress & Breakthroughs","Non-scale wins, consistency, energy shifts and moments worth celebrating."],["Movement Vibes","Walking, yoga, mirror-dancing and sound-based movement playlists."],["Body Affirmations","Words to return to when you feel disconnected from your body."]
 ]},
 money:{title:"Financial Flow",sub:"Clarity meets abundance",intro:"A shame-free space for financial stewardship. Know what's coming in, what is going out, what you're building toward and what your money is making possible.",mods:[
-["Monthly Budget Center","Income, fixed expenses, flexible spending, savings and monthly reviews."],["Receipts + Reimbursements Vault","Organize receipts, invoices, pending reimbursements and personal vs. business expenses."],["Dream Funds","Give the trip, couch, business, freedom or next dream a dollar amount and a meaningful why."],["Business & Side Hustle Ledger","Revenue streams, recurring expenses, profit/loss and income opportunities."],["Family & Household Expenses","Shared bills, groceries, subscriptions, school needs and upcoming family costs."]
+["Everyday Budget","Income, fixed expenses, flexible spending, savings and monthly reviews."],["Business & Side Hustle Ledger","Revenue streams, recurring expenses, profit/loss and income opportunities."],["Family & Household Expenses","Shared bills, groceries, subscriptions, school needs and upcoming family costs."],["Dream Funds","Give the trip, couch, business, freedom or next dream a dollar amount and a meaningful why."],["Receipts + Reimbursements Vault","Track reimbursement status only — this doesn't duplicate what you log in your other ledgers above."]
 ]}
 };
 
@@ -2009,17 +2029,38 @@ function openRoom(id){
 }
 function roomHTML(id,d){
  let mods=d.mods.map((m,i)=>moduleHTML(id,i,m[0],m[1])).join("");
- return `<button class="back" onclick="document.getElementById('rooms').scrollIntoView({behavior:'smooth'})">← Back to the Map</button>
+ return `<button class="back" onclick="showSoftLifeMap()">← Back to the Map</button>
  <div class="work-head"><div><div class="eyebrow">${d.sub}</div><h2>${d.title}</h2></div><div><p>${d.intro}</p>
  <div class="meditation"><button onclick="this.textContent=this.textContent==='▶'?'Ⅱ':'▶'">▶</button><b>${d.title} Guided Audio</b><br><small>Recorded meditation / reflection audio placeholder</small></div></div></div>
  <div class="module-grid"><div class="visual-review" id="${id}VisualReview"></div>${mods}</div>`
+}
+function showSoftLifeMap(){
+ // Reveals the atlas + room-grid and hides whichever room workspace was
+ // open — the deliberate "browse all 4 rooms" view, as opposed to
+ // landing directly in one specific room via My Spaces/Today.
+ document.querySelectorAll(".workspace").forEach(w=>w.classList.remove("active"));
+ const mapHero=document.getElementById("map"),roomsGrid=document.getElementById("rooms");
+ if(mapHero)mapHero.style.display="";
+ if(roomsGrid)roomsGrid.style.display="";
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+function openSoftLifeMapOverview(){
+ // Entry point from My Spaces (or anywhere else outside a specific
+ // room) into the full atlas — no room pre-selected, unlike openSpace()
+ // which intentionally skips straight past the atlas into one room.
+ ["shellToday","shellSpaces","shellCommunity","shellProfile","flowPage","creatorPage","integrationPage","becomingPage","spiritualPage"].forEach(pid=>document.getElementById(pid)?.classList.remove("active"));
+ document.getElementById("backToShell")?.classList.add("show");
+ const map=document.getElementById("mapPage");
+ if(map)map.style.display="block";
+ renderMapRooms();
+ showSoftLifeMap();
 }
 function moduleHTML(room,i,title,desc){
  let special=room==="money"&&title==="Dream Funds"?" money-card":"";
 
  /* HOME */
  if(room==="home" && title==="Family Calendar"){
-   return `<div class="module wide"><div class="eyebrow">${String(i+1).padStart(2,"0")}</div><h3>${title}</h3><p>${desc}</p>
+   return `<div class="module wide"><div class="eyebrow">01 · Family Calendar</div><h3>${title}</h3><p>${desc}</p>
    <div class="calendar-wrap">
      <div class="calendar-toolbar">
        <div class="cal-actions"><button onclick="changeMonth(-1)">←</button><button onclick="goToday()">Today</button><button onclick="changeMonth(1)">→</button></div>
@@ -2031,96 +2072,97 @@ function moduleHTML(room,i,title,desc){
    </div></div>`;
  }
  if(room==="home" && title==="Meals & Grocery"){
-   return `<div class="module wide"><div class="eyebrow">${String(i+1).padStart(2,"0")}</div><h3>${title}</h3><p>${desc}</p>
-   <div class="tool-block"><h4 class="tool-subtitle">This Week's Meals</h4><p class="tool-note">Plan only what helps. You can keep it to dinner, or use breakfast/lunch/dinner when you need more structure.</p><div class="day-tabs" id="mealDayTabs"></div><div class="meal-day" id="mealDay"></div></div>
+   return `<div class="module wide"><div class="eyebrow">02 · Meals &amp; Grocery</div><h3>${title}</h3><p>${desc}</p>
+   <div class="tool-block"><h4 class="tool-subtitle">This Week's Meals</h4><p class="tool-note">Plan only what helps. You can keep it to dinner, or use breakfast/lunch/dinner when you need more structure. Add ingredients as you plan, then send them straight to your grocery list.</p><div class="day-tabs" id="mealDayTabs"></div><div class="meal-day" id="mealDay"></div></div>
    <div class="tool-block"><h4 class="tool-subtitle">Grocery List</h4><p class="tool-note">Add items by category and check them off while shopping. Edit or delete anything that changes.</p>
    <div class="grocery-toolbar"><input id="groceryItemInput" placeholder="Add grocery item..."><select id="groceryCategory"><option>Produce</option><option>Protein</option><option>Dairy</option><option>Pantry</option><option>Frozen</option><option>Household</option><option>Other</option></select><button onclick="addGroceryItem()">Add Item</button></div><div class="grocery-groups" id="groceryGroups"></div></div></div>`;
  }
  if(room==="home" && title==="Household Rhythm"){
-   return `<div class="module wide"><div class="eyebrow">${String(i+1).padStart(2,"0")}</div><h3>${title}</h3><p>${desc}</p><div class="tool-block"><h4 class="tool-subtitle">Responsibilities</h4><p class="tool-note">Keep this light: what needs tending, who owns it, and how often it comes around.</p><table class="rhythm-table"><thead><tr><th>Done</th><th>Responsibility</th><th>Assigned To</th><th>Frequency</th><th></th></tr></thead><tbody id="rhythmBody"></tbody></table><div class="rhythm-add"><input id="rhythmTask" placeholder="e.g., Take trash out"><input id="rhythmPerson" placeholder="Assigned to"><select id="rhythmFreq"><option>Daily</option><option>Weekly</option><option>Biweekly</option><option>Monthly</option><option>As needed</option></select><button onclick="addRhythm()">Add</button></div></div></div>`;
+   return `<div class="module wide"><div class="eyebrow">03 · Household Rhythm</div><h3>${title}</h3><p>${desc}</p><div class="tool-block"><h4 class="tool-subtitle">Responsibilities</h4><p class="tool-note">Keep this light: what needs tending, who owns it, and how often it comes around. Send a chore straight to your Family Calendar if you want a real reminder for it.</p><table class="rhythm-table"><thead><tr><th>Done</th><th>Responsibility</th><th>Assigned To</th><th>Frequency</th><th></th></tr></thead><tbody id="rhythmBody"></tbody></table><div class="rhythm-add"><input id="rhythmTask" placeholder="e.g., Take trash out"><input id="rhythmPerson" placeholder="Assigned to"><select id="rhythmFreq"><option>Daily</option><option>Weekly</option><option>Biweekly</option><option>Monthly</option><option>As needed</option></select><button onclick="addRhythm()">Add</button></div></div></div>`;
  }
  if(room==="home" && title==="Kids & Family Activities"){
-   return `<div class="module wide"><div class="eyebrow">${String(i+1).padStart(2,"0")}</div><h3>${title}</h3><p>${desc}</p><div class="tool-block"><h4 class="tool-subtitle">Family Activity Reference</h4><p class="tool-note">A quick-reference home for recurring activities, locations, people, and the details you always need at the last minute.</p><div class="activity-cards" id="activityCards"></div><div class="activity-add"><input id="activityPerson" placeholder="Person / child"><input id="activityName" placeholder="Activity"><input id="activitySchedule" placeholder="Schedule, e.g., Tue 6 PM"><input id="activityLocation" placeholder="Location"><textarea id="activityNotes" placeholder="Coach/teacher/contact, what to bring, notes..."></textarea><button onclick="addActivity()">Add Activity</button></div></div></div>`;
+   return `<div class="module wide"><div class="eyebrow">04 · Kids &amp; Family Activities</div><h3>${title}</h3><p>${desc}</p><div class="tool-block"><h4 class="tool-subtitle">Family Activity Reference</h4><p class="tool-note">A quick-reference home for recurring activities, locations, people, and the details you always need at the last minute. Send one to your Family Calendar to get a real recurring reminder.</p><div class="activity-cards" id="activityCards"></div><div class="activity-add"><input id="activityPerson" placeholder="Person / child"><input id="activityName" placeholder="Activity"><input id="activitySchedule" placeholder="Schedule, e.g., Tue 6 PM"><input id="activityLocation" placeholder="Location"><textarea id="activityNotes" placeholder="Coach/teacher/contact, what to bring, notes..."></textarea><button onclick="addActivity()">Add Activity</button></div></div></div>`;
  }
  if(room==="home" && title==="Home Rituals"){
-   return `<div class="module wide"><div class="eyebrow">${String(i+1).padStart(2,"0")}</div><h3>${title}</h3><p>${desc}</p><div class="tool-block"><h4 class="tool-subtitle">Ritual Library</h4><p class="tool-note">Small practices that help home feel connected, peaceful, and intentional.</p><div class="ritual-library" id="ritualLibrary"></div><div class="ritual-add"><input id="ritualTitle" placeholder="Ritual name"><select id="ritualType"><option>Connection</option><option>Reset</option><option>Wellness</option><option>Affirmation</option><option>Family</option><option>Seasonal</option></select><textarea id="ritualDesc" placeholder="What does this ritual look like?"></textarea><button onclick="addRitual()">Add Ritual</button></div></div></div>`;
+   return `<div style="grid-column:1/-1;text-align:center;padding:22px 0 6px"><div class="eyebrow">Whenever you need it</div><p style="font-size:11px;color:#a98884;margin-top:4px">A different rhythm than the tools above — dip in occasionally, no sequence to follow.</p></div><div class="module wide"><div class="eyebrow">Toolbox</div><h3>${title}</h3><p>${desc}</p><div class="tool-block"><h4 class="tool-subtitle">Ritual Library</h4><p class="tool-note">Small practices that help home feel connected, peaceful, and intentional.</p><div class="ritual-library" id="ritualLibrary"></div><div class="ritual-add"><input id="ritualTitle" placeholder="Ritual name"><select id="ritualType"><option>Connection</option><option>Reset</option><option>Wellness</option><option>Affirmation</option><option>Family</option><option>Seasonal</option></select><textarea id="ritualDesc" placeholder="What does this ritual look like?"></textarea><button onclick="addRitual()">Add Ritual</button></div></div></div>`;
  }
 
  /* PURPOSE */
- if(room==="purpose" && title==="Weekly & Monthly Planning"){
-   return `<div class="module wide"><div class="eyebrow">${String(i+1).padStart(2,"0")}</div><h3>${title}</h3><p>${desc}</p>
+ if(room==="purpose" && title==="This Week's Plan"){
+   return `<div class="module wide"><div class="eyebrow">01 · This Week's Plan</div><h3>${title}</h3><p>${desc}</p>
    <table class="plan-table"><thead><tr><th>Done</th><th>Item</th><th>Date</th><th>Type</th><th></th></tr></thead><tbody id="careerPlanBody"></tbody></table>
    <div class="soft-form"><input id="careerPlanTitle" placeholder="Meeting, deadline, project..."><input id="careerPlanDate" type="date"><select id="careerPlanType"><option>Meeting</option><option>Deadline</option><option>Project</option><option>Networking</option><option>Personal</option></select><div></div><button onclick="addCareerPlan()">Add to Plan</button></div></div>`;
  }
  if(room==="purpose" && title==="Vision Casting"){
-   return `<div class="module wide"><div class="eyebrow">${String(i+1).padStart(2,"0")}</div><h3>${title}</h3><p>${desc}</p>
+   return `<div class="module wide"><div class="eyebrow">02 · Vision &amp; Direction</div><h3>${title}</h3><p>${desc}</p>
    <div class="two-col-tool">
     <div class="soft-card"><h4>Ideal Workday</h4><p>Describe how your ideal workday feels—not only what you do.</p><textarea class="field" id="idealWorkday" placeholder="I wake up feeling..."></textarea><button class="pill" onclick="saveCareerVision()">Save</button></div>
     <div class="soft-card"><h4>Dream Role / Direction</h4><p>Write the role, business, pivot, or work chapter you are calling in.</p><textarea class="field" id="dreamRole" placeholder="The work I want to be doing is..."></textarea><button class="pill" onclick="saveCareerVision()">Save</button></div>
    </div>
-   <div class="soft-card" style="margin-top:14px"><h4>Dream Companies, Brands or Clients</h4><div class="data-list" id="dreamClientList"></div><div class="add"><input id="dreamClientInput" placeholder="Add a company, brand or client..."><button onclick="addDreamClient()">Add</button></div></div></div>`;
+   <div class="soft-card" style="margin-top:14px"><h4>Dream Companies, Brands or Clients</h4><div class="data-list" id="dreamClientList"></div><div class="add"><input id="dreamClientInput" placeholder="Add a company, brand or client..."><button onclick="addDreamClient()">Add</button></div></div>
+   <div class="soft-card" style="margin-top:14px;border-color:#C16B62"><h4>Turn This Into a Step</h4><p>One small action moves a vision forward more than a perfect plan ever does.</p><div style="display:flex;gap:8px"><input id="visionTaskInput" placeholder="One small step toward this..." style="flex:1"><button onclick="addVisionTask()">Add to This Week's Plan</button></div><p id="visionTaskConfirm" style="font-size:11px;color:#C16B62;margin-top:8px;min-height:14px;opacity:0;transition:opacity .3s"></p></div></div>`;
  }
  if(room==="purpose" && title==="Brag Bank"){
-   return `<div class="module"><div class="eyebrow">${String(i+1).padStart(2,"0")}</div><h3>${title}</h3><p>${desc}</p><div class="data-list" id="bragList"></div><div class="soft-form"><input id="bragText" placeholder="What did you accomplish?"><input id="bragDate" type="date"><textarea id="bragContext" placeholder="Praise, impact, numbers, context..."></textarea><button onclick="addBrag()">Bank this win</button></div></div>`;
+   return `<div class="module"><div class="eyebrow">03 · Brag Bank</div><h3>${title}</h3><p>${desc}</p><div class="data-list" id="bragList"></div><div class="soft-form"><input id="bragText" placeholder="What did you accomplish?"><input id="bragDate" type="date"><textarea id="bragContext" placeholder="Praise, impact, numbers, context..."></textarea><button onclick="addBrag()">Bank this win</button></div></div>`;
  }
- if(room==="purpose" && title==="Personal Brand & Resume"){
-   return `<div class="module"><div class="eyebrow">${String(i+1).padStart(2,"0")}</div><h3>${title}</h3><p>${desc}</p><div class="data-list" id="brandList"></div><div class="soft-form"><select id="brandType"><option>Resume</option><option>Bio</option><option>LinkedIn</option><option>Elevator Pitch</option><option>Portfolio</option><option>Other</option></select><input id="brandTitle" placeholder="Title"><input id="brandLink" placeholder="Link (optional)"><input id="brandNote" placeholder="Note / version"><button onclick="addBrandItem()">Save Resource</button></div></div>`;
- }
- if(room==="purpose" && title==="Workspace Inspiration"){
-   return `<div class="module"><div class="eyebrow">${String(i+1).padStart(2,"0")}</div><h3>${title}</h3><p>${desc}</p><div class="data-list" id="workspaceInspoList"></div><div class="soft-form"><input id="inspoTitle" placeholder="Idea / aesthetic"><input id="inspoLink" placeholder="Pinterest, TikTok, image link..."><textarea id="inspoNote" placeholder="What do you love about it?"></textarea><button onclick="addWorkspaceInspo()">Save Inspiration</button></div></div>`;
- }
- if(room==="purpose" && title==="Emotional Wellness at Work"){
-   return `<div class="module"><div class="eyebrow">${String(i+1).padStart(2,"0")}</div><h3>${title}</h3><p>${desc}</p>
+ if(room==="purpose" && title==="Emotional Check-In"){
+   return `<div class="module"><div class="eyebrow">04 · Emotional Check-In</div><h3>${title}</h3><p>${desc}</p>
    <div class="soft-card"><h4>This Week's Work Boundary</h4><textarea class="field" id="workBoundary" placeholder="What boundary needs honoring?"></textarea></div>
    <div class="soft-card" style="margin-top:10px"><h4>Stress Mantra</h4><input class="field" id="workMantra" placeholder="I can move through this with..."></div>
    <div class="soft-card" style="margin-top:10px"><h4>Reflection</h4><textarea class="field" id="workReflection" placeholder="What is my current purpose trying to teach me?"></textarea></div>
    <button class="pill" style="margin-top:12px" onclick="saveWorkWellness()">Save Check-In</button></div>`;
  }
+ if(room==="purpose" && title==="Personal Brand & Resume"){
+   return `<div style="grid-column:1/-1;text-align:center;padding:22px 0 6px"><div class="eyebrow">Whenever you need it</div><p style="font-size:11px;color:#a98884;margin-top:4px">Support tools below — dip in anytime, no sequence to follow.</p></div><div class="module"><div class="eyebrow">Toolbox</div><h3>${title}</h3><p>${desc}</p><div class="data-list" id="brandList"></div><div class="soft-form"><select id="brandType"><option>Resume</option><option>Bio</option><option>LinkedIn</option><option>Elevator Pitch</option><option>Portfolio</option><option>Other</option></select><input id="brandTitle" placeholder="Title"><input id="brandLink" placeholder="Link (optional)"><input id="brandNote" placeholder="Note / version"><button onclick="addBrandItem()">Save Resource</button></div></div>`;
+ }
+ if(room==="purpose" && title==="Workspace Inspiration"){
+   return `<div class="module"><div class="eyebrow">Toolbox</div><h3>${title}</h3><p>${desc}</p><div class="data-list" id="workspaceInspoList"></div><div class="soft-form"><input id="inspoTitle" placeholder="Idea / aesthetic"><input id="inspoLink" placeholder="Pinterest, TikTok, image link..."><textarea id="inspoNote" placeholder="What do you love about it?"></textarea><button onclick="addWorkspaceInspo()">Save Inspiration</button></div></div>`;
+ }
 
  /* BODY */
  if(room==="body" && title==="Movement Menu"){
-   return `<div class="module wide"><div class="eyebrow">${String(i+1).padStart(2,"0")}</div><h3>${title}</h3><p>${desc}</p>
+   return `<div class="module wide"><div class="eyebrow">01 · Your Ideas</div><h3>${title}</h3><p>${desc}</p>
    <div class="energy-filter"><button class="on" onclick="setMovementFilter(this,'All')">All</button><button onclick="setMovementFilter(this,'High')">High Energy</button><button onclick="setMovementFilter(this,'Medium')">Medium</button><button onclick="setMovementFilter(this,'Low')">Low</button></div>
    <div class="activity-cards" id="movementMenuCards"></div>
    <div class="soft-form"><input id="movementName" placeholder="Movement idea"><select id="movementEnergy"><option>High</option><option>Medium</option><option>Low</option></select><input id="movementLink" placeholder="Video / routine link (optional)"><textarea id="movementNote" placeholder="Notes..."></textarea><button onclick="addMovement()">Add Movement</button></div></div>`;
  }
- if(room==="body" && title==="Monthly Fitness Flow"){
-   return `<div class="module wide"><div class="eyebrow">${String(i+1).padStart(2,"0")}</div><h3>${title}</h3><p>${desc}</p>
+ if(room==="body" && title==="Your Weekly Rhythm"){
+   return `<div class="module wide"><div class="eyebrow">02 · Your Rhythm</div><h3>${title}</h3><p>${desc}</p>
    <div class="day-tabs" id="fitnessTabs"></div><div id="fitnessDayEditor"></div>
    <div class="soft-card" style="margin-top:16px"><h4>Month-End Reflection</h4><textarea class="field" id="fitnessReflection" placeholder="How did my body feel this month?"></textarea><button class="pill" onclick="saveFitnessReflection()">Save Reflection</button></div></div>`;
  }
- if(room==="body" && title==="Progress & Breakthroughs"){
-   return `<div class="module"><div class="eyebrow">${String(i+1).padStart(2,"0")}</div><h3>${title}</h3><p>${desc}</p><div class="timeline" id="breakthroughTimeline"></div><div class="soft-form"><input id="breakthroughTitle" placeholder="Today's win"><input id="breakthroughDate" type="date"><textarea id="breakthroughNote" placeholder="What changed, how did it feel?"></textarea><button onclick="addBreakthrough()">Celebrate It</button></div></div>`;
- }
  if(room==="body" && title==="Stretch Tracker"){
-   return `<div class="module"><div class="eyebrow">${String(i+1).padStart(2,"0")}</div><h3>${title}</h3><p>${desc}</p>
+   return `<div class="module"><div class="eyebrow">03 · Daily Check-In</div><h3>${title}</h3><p>${desc}</p>
    <div class="soft-form"><select id="stretchTime"><option>AM</option><option>PM</option></select><select id="stretchArea"><option>Neck</option><option>Shoulders</option><option>Back</option><option>Hips</option><option>Legs</option><option>Full Body</option></select><input id="stretchMinutes" type="number" min="1" placeholder="Minutes"><input id="stretchLink" placeholder="Routine link (optional)"><textarea id="stretchNote" placeholder="How did your body feel?"></textarea><button onclick="addStretch()">Log Stretch</button></div><div class="data-list" id="stretchList"></div></div>`;
  }
+ if(room==="body" && title==="Progress & Breakthroughs"){
+   return `<div class="module"><div class="eyebrow">04 · Progress &amp; Celebration</div><h3>${title}</h3><p>${desc}</p><div class="timeline" id="breakthroughTimeline"></div><div class="soft-form"><input id="breakthroughTitle" placeholder="Today's win"><input id="breakthroughDate" type="date"><textarea id="breakthroughNote" placeholder="What changed, how did it feel?"></textarea><button onclick="addBreakthrough()">Celebrate It</button></div></div>`;
+ }
  if(room==="body" && title==="Movement Vibes"){
-   return `<div class="module"><div class="eyebrow">${String(i+1).padStart(2,"0")}</div><h3>${title}</h3><p>${desc}</p><div class="data-list" id="vibeList"></div><div class="soft-form"><input id="vibeTitle" placeholder="Playlist / sound set name"><select id="vibeType"><option>Walking</option><option>Yoga</option><option>Dance</option><option>Stretching</option><option>Sound Healing</option><option>Other</option></select><input id="vibeLink" placeholder="Spotify / Apple Music / YouTube link"><div></div><button onclick="addVibe()">Save Vibe</button></div></div>`;
+   return `<div style="grid-column:1/-1;text-align:center;padding:22px 0 6px"><div class="eyebrow">Whenever you need it</div><p style="font-size:11px;color:#a98884;margin-top:4px">Support tools below — dip in anytime, no sequence to follow.</p></div><div class="module"><div class="eyebrow">Toolbox</div><h3>${title}</h3><p>${desc}</p><div class="data-list" id="vibeList"></div><div class="soft-form"><input id="vibeTitle" placeholder="Playlist / sound set name"><select id="vibeType"><option>Walking</option><option>Yoga</option><option>Dance</option><option>Stretching</option><option>Sound Healing</option><option>Other</option></select><input id="vibeLink" placeholder="Spotify / Apple Music / YouTube link"><div></div><button onclick="addVibe()">Save Vibe</button></div></div>`;
  }
  if(room==="body" && title==="Body Affirmations"){
-   return `<div class="module"><div class="eyebrow">${String(i+1).padStart(2,"0")}</div><h3>${title}</h3><p>${desc}</p><div class="aff-card"><div class="affirmation" id="currentAffirmation">“My body is my home, and I choose to love her.”</div><button onclick="randomAffirmation()">Give me another</button></div><div class="data-list" id="affirmationList"></div><div class="add"><input id="affirmationInput" placeholder="Add a body affirmation..."><button onclick="addAffirmation()">Add</button></div></div>`;
+   return `<div class="module"><div class="eyebrow">Toolbox</div><h3>${title}</h3><p>${desc}</p><div class="aff-card"><div class="affirmation" id="currentAffirmation">“My body is my home, and I choose to love her.”</div><button onclick="randomAffirmation()">Give me another</button></div><div class="data-list" id="affirmationList"></div><div class="add"><input id="affirmationInput" placeholder="Add a body affirmation..."><button onclick="addAffirmation()">Add</button></div></div>`;
  }
 
  /* MONEY */
- if(room==="money" && title==="Monthly Budget Center"){
-   return `<div class="module wide"><div class="eyebrow">${String(i+1).padStart(2,"0")}</div><h3>${title}</h3><p>${desc}</p>
+ if(room==="money" && title==="Everyday Budget"){
+   return `<div class="module wide"><div class="eyebrow">02 · Everyday Budget</div><h3>${title}</h3><p>${desc}</p>
    <div class="money-summary"><div class="money-stat"><small>Income</small><b id="budgetIncome">$0</b></div><div class="money-stat"><small>Expenses</small><b id="budgetExpenses">$0</b></div><div class="money-stat"><small>Remaining</small><b id="budgetRemaining">$0</b></div></div>
    <table class="money-table"><thead><tr><th>Type</th><th>Category</th><th>Description</th><th>Amount</th><th></th></tr></thead><tbody id="budgetBody"></tbody></table>
    <div class="soft-form"><select id="budgetType"><option>Income</option><option>Expense</option></select><input id="budgetCategory" placeholder="Category"><input id="budgetDesc" placeholder="Description"><input id="budgetAmount" type="number" step="0.01" placeholder="Amount"><button onclick="addBudgetItem()">Add Transaction</button></div></div>`;
  }
- if(room==="money" && title==="Receipts + Reimbursements Vault"){
-   return `<div class="module"><div class="eyebrow">${String(i+1).padStart(2,"0")}</div><h3>${title}</h3><p>${desc}</p><div class="data-list" id="receiptList"></div><div class="soft-form"><input id="receiptName" placeholder="Receipt / expense"><input id="receiptAmount" type="number" step="0.01" placeholder="Amount"><select id="receiptScope"><option>Personal</option><option>Business</option></select><select id="receiptStatus"><option>Not reimbursable</option><option>Pending reimbursement</option><option>Reimbursed</option></select><input id="receiptMonth" type="month"><input id="receiptLink" placeholder="File/link reference (optional)"><button onclick="addReceipt()">Add to Vault</button></div></div>`;
- }
- if(room==="money" && title==="Dream Funds"){
-   return `<div class="module wide money-card"><div class="eyebrow" style="color:#ffe5e2">${String(i+1).padStart(2,"0")}</div><h3>${title}</h3><p>${desc}</p><div class="fund-grid" id="fundGrid"></div><div class="soft-form"><input id="fundName" placeholder="What are you saving for?"><input id="fundTarget" type="number" step="0.01" placeholder="Target amount"><input id="fundCurrent" type="number" step="0.01" placeholder="Current saved"><input id="fundDeadline" type="date"><textarea id="fundWhy" placeholder="Why does this matter to you?"></textarea><button onclick="addFund()">Create Dream Fund</button></div></div>`;
- }
  if(room==="money" && title==="Business & Side Hustle Ledger"){
-   return `<div class="module"><div class="eyebrow">${String(i+1).padStart(2,"0")}</div><h3>${title}</h3><p>${desc}</p><div class="money-summary" style="grid-template-columns:1fr 1fr"><div class="money-stat"><small>Revenue</small><b id="bizRevenue">$0</b></div><div class="money-stat"><small>Net</small><b id="bizNet">$0</b></div></div><div class="data-list" id="bizLedger"></div><div class="soft-form"><select id="bizType"><option>Income</option><option>Expense</option></select><input id="bizSource" placeholder="Source / category"><input id="bizAmount" type="number" step="0.01" placeholder="Amount"><input id="bizDate" type="date"><button onclick="addBizEntry()">Add Entry</button></div></div>`;
+   return `<div class="module"><div class="eyebrow">03 · Business Ledger</div><h3>${title}</h3><p>${desc}</p><div class="money-summary" style="grid-template-columns:1fr 1fr"><div class="money-stat"><small>Revenue</small><b id="bizRevenue">$0</b></div><div class="money-stat"><small>Net</small><b id="bizNet">$0</b></div></div><div class="data-list" id="bizLedger"></div><div class="soft-form"><select id="bizType"><option>Income</option><option>Expense</option></select><input id="bizSource" placeholder="Source / category"><input id="bizAmount" type="number" step="0.01" placeholder="Amount"><input id="bizDate" type="date"><button onclick="addBizEntry()">Add Entry</button></div></div>`;
  }
  if(room==="money" && title==="Family & Household Expenses"){
-   return `<div class="module"><div class="eyebrow">${String(i+1).padStart(2,"0")}</div><h3>${title}</h3><p>${desc}</p><div class="data-list" id="houseExpenseList"></div><div class="soft-form"><input id="houseExpName" placeholder="Bill / expense"><input id="houseExpAmount" type="number" step="0.01" placeholder="Amount"><input id="houseExpDue" type="date"><input id="houseExpPayer" placeholder="Who pays?"><select id="houseExpCategory"><option>Housing</option><option>Utilities</option><option>Groceries</option><option>Childcare/School</option><option>Subscription</option><option>Transportation</option><option>Other</option></select><select id="houseExpStatus"><option>Upcoming</option><option>Paid</option></select><button onclick="addHouseExpense()">Add Expense</button></div></div>`;
+   return `<div class="module"><div class="eyebrow">04 · Household Bills</div><h3>${title}</h3><p>${desc}</p><div class="data-list" id="houseExpenseList"></div><div class="soft-form"><input id="houseExpName" placeholder="Bill / expense"><input id="houseExpAmount" type="number" step="0.01" placeholder="Amount"><input id="houseExpDue" type="date"><input id="houseExpPayer" placeholder="Who pays?"><select id="houseExpCategory"><option>Housing</option><option>Utilities</option><option>Groceries</option><option>Childcare/School</option><option>Subscription</option><option>Transportation</option><option>Other</option></select><select id="houseExpStatus"><option>Upcoming</option><option>Paid</option></select><button onclick="addHouseExpense()">Add Expense</button></div></div>`;
+ }
+ if(room==="money" && title==="Dream Funds"){
+   return `<div class="module wide money-card"><div class="eyebrow" style="color:#ffe5e2">05 · Dream Funds</div><h3>${title}</h3><p>${desc}</p><div class="fund-grid" id="fundGrid"></div><div class="soft-form"><input id="fundName" placeholder="What are you saving for?"><input id="fundTarget" type="number" step="0.01" placeholder="Target amount"><input id="fundCurrent" type="number" step="0.01" placeholder="Current saved"><input id="fundDeadline" type="date"><textarea id="fundWhy" placeholder="Why does this matter to you?"></textarea><button onclick="addFund()">Create Dream Fund</button></div></div>`;
+ }
+ if(room==="money" && title==="Receipts + Reimbursements Vault"){
+   return `<div style="grid-column:1/-1;text-align:center;padding:22px 0 6px"><div class="eyebrow">Whenever you need it</div><p style="font-size:11px;color:#a98884;margin-top:4px">Support tools below — dip in anytime, no sequence to follow.</p></div><div class="module"><div class="eyebrow">Toolbox</div><h3>${title}</h3><p>${desc}</p><div class="data-list" id="receiptList"></div><div class="soft-form"><input id="receiptName" placeholder="Receipt / expense"><input id="receiptAmount" type="number" step="0.01" placeholder="Amount"><select id="receiptScope"><option>Personal</option><option>Business</option></select><select id="receiptStatus"><option>Not reimbursable</option><option>Pending reimbursement</option><option>Reimbursed</option></select><input id="receiptMonth" type="month"><input id="receiptLink" placeholder="File/link reference (optional)"><button onclick="addReceipt()">Add to Vault</button></div></div>`;
  }
 
  return `<div class="module${special}"><div class="eyebrow">${String(i+1).padStart(2,"0")}</div><h3>${title}</h3><p>${desc}</p><div class="entries" id="${room}-${i}-entries"></div><div class="add"><input id="${room}-${i}-input" placeholder="Add something here..."><button onclick="addEntry('${room}',${i})">Add</button></div></div>`
@@ -2223,18 +2265,18 @@ function goToday(){calCursor=new Date();calCursor.setDate(1);renderCalendar()}
 function toDateKey(d){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`}
 function formatTime(t){if(!t)return"";const [h,m]=t.split(":").map(Number);const d=new Date();d.setHours(h,m);return d.toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit"})}
 
-function openEventModal(id=null,dateKey=null){
+function openEventModal(id=null,dateKey=null,prefill=null){
   editingEventId=id||null;
   const events=getCalendarEvents();
   const ev=id?events.find(x=>x.id===id):null;
   document.getElementById("eventModalTitle").textContent=ev?"Edit Family Event":"Add Family Event";
-  document.getElementById("eventTitle").value=ev?.title||"";
+  document.getElementById("eventTitle").value=ev?.title||prefill?.title||"";
   document.getElementById("eventDate").value=ev?.date||dateKey||toDateKey(new Date());
   document.getElementById("eventTime").value=ev?.time||"";
-  document.getElementById("eventCategory").value=ev?.category||"family";
-  document.getElementById("eventPerson").value=ev?.person||"";
-  document.getElementById("eventRepeat").value=ev?.repeat||"none";
-  document.getElementById("eventNotes").value=ev?.notes||"";
+  document.getElementById("eventCategory").value=ev?.category||prefill?.category||"family";
+  document.getElementById("eventPerson").value=ev?.person||prefill?.person||"";
+  document.getElementById("eventRepeat").value=ev?.repeat||prefill?.repeat||"none";
+  document.getElementById("eventNotes").value=ev?.notes||prefill?.notes||"";
   document.getElementById("deleteEventBtn").style.display=ev?"inline-block":"none";
   document.getElementById("eventModal").classList.add("open");
 }
@@ -2281,8 +2323,24 @@ function renderMealPlanner(){
   if(!tabs||!root)return;
   tabs.innerHTML=mealDays.map(d=>`<button class="day-tab ${d===activeMealDay?"on":""}" onclick="activeMealDay='${d}';renderMealPlanner()">${d.slice(0,3)}</button>`).join("");
   const meals=getMeals()[activeMealDay]||{};
-  const rows=[["Breakfast","breakfast"],["Lunch","lunch"],["Dinner","dinner"],["Notes","notes"]];
-  root.innerHTML=rows.map(([label,k])=>`<div class="meal-row"><label>${label}</label><input value="${escAttr(meals[k]||"")}" placeholder="${label==="Notes"?"prep, leftovers, eat out...":"What sounds good?"}" onblur="saveMealField('${k}',this.value)"><button onclick="clearMealField('${k}')">Clear</button></div>`).join("");
+  const rows=[["Breakfast","breakfast"],["Lunch","lunch"],["Dinner","dinner"]];
+  const mealRows=rows.map(([label,k])=>`<div class="meal-row"><label>${label}</label><input value="${escAttr(meals[k]||"")}" placeholder="What sounds good?" onblur="saveMealField('${k}',this.value)"><button onclick="clearMealField('${k}')">Clear</button></div>`).join("");
+  const ingredientsRow=`<div class="meal-row"><label>Ingredients Needed</label><input id="mealIngredientsInput" value="${escAttr(meals.ingredients||"")}" placeholder="pasta, ground beef, sauce (comma-separated)" onblur="saveMealField('ingredients',this.value)"><button onclick="addMealIngredientsToGrocery()">→ Add to Grocery List</button></div>
+  <p id="mealIngredientsConfirm" style="font-size:11px;color:#C16B62;margin:-4px 0 4px;min-height:14px;opacity:0;transition:opacity .3s"></p>`;
+  const notesRow=`<div class="meal-row"><label>Notes</label><input value="${escAttr(meals.notes||"")}" placeholder="prep, leftovers, eat out..." onblur="saveMealField('notes',this.value)"><button onclick="clearMealField('notes')">Clear</button></div>`;
+  root.innerHTML=mealRows+ingredientsRow+notesRow;
+}
+function addMealIngredientsToGrocery(){
+  const inp=document.getElementById("mealIngredientsInput");
+  if(!inp||!inp.value.trim())return;
+  const items=inp.value.split(",").map(s=>s.trim()).filter(Boolean);
+  if(!items.length)return;
+  let arr=getGrocery();
+  items.forEach(text=>arr.push({id:String(Date.now())+Math.random().toString(16).slice(2),text,category:"Other",done:false}));
+  saveGrocery(arr);
+  renderGrocery();
+  const confirm=document.getElementById("mealIngredientsConfirm");
+  if(confirm){confirm.textContent=`Added ${items.length} item${items.length===1?"":"s"} to your grocery list.`;confirm.style.opacity="1"}
 }
 function saveMealField(field,value){let all=getMeals();all[activeMealDay]=all[activeMealDay]||{};all[activeMealDay][field]=value.trim();saveMeals(all)}
 function clearMealField(field){let all=getMeals();all[activeMealDay]=all[activeMealDay]||{};all[activeMealDay][field]="";saveMeals(all);renderMealPlanner()}
@@ -2325,10 +2383,20 @@ function editRhythm(id){
  if(task.trim()){x.task=task.trim();x.person=person.trim();x.freq=freq.trim()||x.freq;saveRhythm(a);renderRhythm()}
 }
 function deleteRhythm(id){if(!confirm("Delete this responsibility?"))return;saveRhythm(getRhythm().filter(x=>x.id!==id));renderRhythm()}
+function mapFreqToRepeat(freq){
+ if(freq==="Weekly")return "weekly";
+ if(freq==="Monthly")return "monthly";
+ return "none"; // Daily / Biweekly / As needed have no clean match — user picks a date manually
+}
+function rhythmToCalendar(id){
+ const item=getRhythm().find(x=>x.id===id);
+ if(!item)return;
+ openEventModal(null,null,{title:item.task,person:item.person,category:"reminder",repeat:mapFreqToRepeat(item.freq)});
+}
 function renderRhythm(){
  const root=document.getElementById("rhythmBody");if(!root)return;
  const a=getRhythm();
- root.innerHTML=a.length?a.map(x=>`<tr class="${x.done?"done-row":""}"><td><input type="checkbox" ${x.done?"checked":""} onchange="toggleRhythm('${x.id}')"></td><td>${esc(x.task)}</td><td>${esc(x.person||"—")}</td><td>${esc(x.freq)}</td><td class="actions"><button onclick="editRhythm('${x.id}')">Edit</button><button onclick="deleteRhythm('${x.id}')">Delete</button></td></tr>`).join(""):`<tr><td colspan="5"><small style="color:#a98884">No responsibilities added yet.</small></td></tr>`;
+ root.innerHTML=a.length?a.map(x=>`<tr class="${x.done?"done-row":""}"><td><input type="checkbox" ${x.done?"checked":""} onchange="toggleRhythm('${x.id}')"></td><td>${esc(x.task)}</td><td>${esc(x.person||"—")}</td><td>${esc(x.freq)}</td><td class="actions"><button onclick="rhythmToCalendar('${x.id}')">→ Calendar</button><button onclick="editRhythm('${x.id}')">Edit</button><button onclick="deleteRhythm('${x.id}')">Delete</button></td></tr>`).join(""):`<tr><td colspan="5"><small style="color:#a98884">No responsibilities added yet.</small></td></tr>`;
 }
 
 /* Activities */
@@ -2351,10 +2419,21 @@ function editActivity(id){
  if(name.trim()){Object.assign(x,{name:name.trim(),person:person.trim(),schedule:schedule.trim(),location:location.trim(),notes:notes.trim()});saveActivities(a);renderActivities()}
 }
 function deleteActivity(id){if(!confirm("Delete this activity?"))return;saveActivities(getActivities().filter(x=>x.id!==id));renderActivities()}
+function activityToCalendar(id){
+ const item=getActivities().find(x=>x.id===id);
+ if(!item)return;
+ openEventModal(null,null,{
+   title:item.person?`${item.name} (${item.person})`:item.name,
+   person:item.person,
+   category:"activity",
+   repeat:"weekly",
+   notes:[item.location?`Location: ${item.location}`:"",item.notes||""].filter(Boolean).join(" · ")
+ });
+}
 function renderActivities(){
  const root=document.getElementById("activityCards");if(!root)return;
  const a=getActivities();
- root.innerHTML=a.length?a.map(x=>`<div class="activity-card"><h4>${esc(x.name)}</h4><div class="activity-meta">${x.person?`<b>${esc(x.person)}</b><br>`:""}${x.schedule?esc(x.schedule)+"<br>":""}${x.location?esc(x.location)+"<br>":""}${x.notes?esc(x.notes):""}</div><div class="activity-actions"><button onclick="editActivity('${x.id}')">Edit</button><button onclick="deleteActivity('${x.id}')">Delete</button></div></div>`).join(""):`<small style="color:#a98884">No family activities added yet.</small>`;
+ root.innerHTML=a.length?a.map(x=>`<div class="activity-card"><h4>${esc(x.name)}</h4><div class="activity-meta">${x.person?`<b>${esc(x.person)}</b><br>`:""}${x.schedule?esc(x.schedule)+"<br>":""}${x.location?esc(x.location)+"<br>":""}${x.notes?esc(x.notes):""}</div><div class="activity-actions"><button onclick="activityToCalendar('${x.id}')">→ Calendar</button><button onclick="editActivity('${x.id}')">Edit</button><button onclick="deleteActivity('${x.id}')">Delete</button></div></div>`).join(""):`<small style="color:#a98884">No family activities added yet.</small>`;
 }
 
 /* Home Rituals */
@@ -2394,7 +2473,28 @@ function money(v){return Number(v||0).toLocaleString("en-US",{style:"currency",c
 
 /* Career plan */
 function getCareerPlan(){return jget("sle-career-plan")}
-function renderCareerPlan(){const root=document.getElementById("careerPlanBody");if(!root)return;const a=getCareerPlan();root.innerHTML=a.length?a.sort((x,y)=>(x.date||"").localeCompare(y.date||"")).map(x=>`<tr class="${x.done?"done-row":""}"><td><input type="checkbox" ${x.done?"checked":""} onchange="toggleCareerPlan('${x.id}')"></td><td>${esc(x.title)}</td><td>${esc(x.date||"—")}</td><td>${esc(x.type)}</td><td class="actions"><button onclick="editCareerPlan('${x.id}')">Edit</button><button onclick="deleteCareerPlan('${x.id}')">Delete</button></td></tr>`).join(""):`<tr><td colspan="5"><small style="color:#a98884">No work items added yet.</small></td></tr>`}
+function renderCareerPlan(){
+ const root=document.getElementById("careerPlanBody");if(!root)return;
+ const a=getCareerPlan().sort((x,y)=>(x.date||"").localeCompare(y.date||""));
+ const today=new Date();today.setHours(0,0,0,0);
+ const todayStr=today.toISOString().slice(0,10);
+ const weekFromNow=new Date(today);weekFromNow.setDate(today.getDate()+7);
+ const weekStr=weekFromNow.toISOString().slice(0,10);
+ const groups={overdue:[],thisWeek:[],later:[],noDate:[]};
+ a.forEach(x=>{
+   if(x.done){groups.later.push(x);return}
+   if(!x.date)groups.noDate.push(x);
+   else if(x.date<todayStr)groups.overdue.push(x);
+   else if(x.date<=weekStr)groups.thisWeek.push(x);
+   else groups.later.push(x);
+ });
+ const row=x=>`<tr class="${x.done?"done-row":""}"><td><input type="checkbox" ${x.done?"checked":""} onchange="toggleCareerPlan('${x.id}')"></td><td>${esc(x.title)}</td><td>${esc(x.date||"—")}</td><td>${esc(x.type)}</td><td class="actions"><button onclick="editCareerPlan('${x.id}')">Edit</button><button onclick="deleteCareerPlan('${x.id}')">Delete</button></td></tr>`;
+ const groupHeader=label=>`<tr><td colspan="5" style="padding-top:14px;font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:#C16B62;border:none;background:transparent">${label}</td></tr>`;
+ const section=(label,items)=>items.length?groupHeader(label)+items.map(row).join(""):"";
+ root.innerHTML=a.length
+   ? section("Overdue",groups.overdue)+section("This Week",groups.thisWeek)+section("Later &amp; Completed",groups.later)+section("No Date",groups.noDate)
+   : `<tr><td colspan="5"><small style="color:#a98884">No work items added yet.</small></td></tr>`;
+}
 function addCareerPlan(){const t=careerPlanTitle.value.trim();if(!t)return;let a=getCareerPlan();a.push({id:String(Date.now()),title:t,date:careerPlanDate.value,type:careerPlanType.value,done:false});jset("sle-career-plan",a);careerPlanTitle.value="";careerPlanDate.value="";renderCareerPlan()}
 function toggleCareerPlan(id){let a=getCareerPlan(),x=a.find(v=>v.id===id);if(x)x.done=!x.done;jset("sle-career-plan",a);renderCareerPlan()}
 function editCareerPlan(id){let a=getCareerPlan(),x=a.find(v=>v.id===id);if(!x)return;let t=prompt("Edit item:",x.title);if(t!==null&&t.trim()){x.title=t.trim();jset("sle-career-plan",a);renderCareerPlan()}}
@@ -2402,6 +2502,17 @@ function deleteCareerPlan(id){if(!confirm("Delete this work item?"))return;jset(
 
 /* Vision */
 function saveCareerVision(){jset("sle-career-vision",{ideal:idealWorkday.value,role:dreamRole.value});alert("Career vision saved.")}
+function addVisionTask(){
+ const t=document.getElementById("visionTaskInput")?.value.trim();
+ if(!t)return;
+ let a=getCareerPlan();
+ a.push({id:String(Date.now()),title:t,date:"",type:"Project",done:false});
+ jset("sle-career-plan",a);
+ document.getElementById("visionTaskInput").value="";
+ renderCareerPlan();
+ const confirm=document.getElementById("visionTaskConfirm");
+ if(confirm){confirm.textContent="Added to This Week's Plan.";confirm.style.opacity="1"}
+}
 function loadCareerVision(){const d=jget("sle-career-vision",{});if(document.getElementById("idealWorkday"))idealWorkday.value=d.ideal||"";if(document.getElementById("dreamRole"))dreamRole.value=d.role||""}
 function getDreamClients(){return jget("sle-dream-clients")}
 function renderDreamClients(){const root=document.getElementById("dreamClientList");if(!root)return;const a=getDreamClients();root.innerHTML=a.length?a.map((x,i)=>`<div class="data-row"><div>${esc(x)}</div><div class="actions"><button onclick="editSimpleList('sle-dream-clients',${i},'dreamClientList')">Edit</button><button onclick="deleteSimpleList('sle-dream-clients',${i},'dreamClientList')">Delete</button></div></div>`).join(""):`<small style="color:#a98884">Add the people or places you'd love to work with.</small>`}
@@ -2456,19 +2567,46 @@ function deleteMovement(id){if(!confirm("Delete this movement idea?"))return;jse
 const fitDays=["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
 let activeFitDay="Monday";
 function getFitness(){return jget("sle-fitness-flow",{})}
-function renderFitnessFlow(){const tabs=document.getElementById("fitnessTabs"),root=document.getElementById("fitnessDayEditor");if(!tabs||!root)return;tabs.innerHTML=fitDays.map(d=>`<button class="day-tab ${d===activeFitDay?"on":""}" onclick="activeFitDay='${d}';renderFitnessFlow()">${d.slice(0,3)}</button>`).join("");const v=getFitness()[activeFitDay]||"";root.innerHTML=`<div class="meal-row"><label>${activeFitDay}</label><input id="fitDayInput" value="${escAttr(v)}" placeholder="Strength, yoga, dance, rest..."><button onclick="saveFitnessDay()">Save</button></div>`;const r=jget("sle-fitness-reflection",{});if(document.getElementById("fitnessReflection"))fitnessReflection.value=r.text||""}
+function getDateForWeekday(weekdayName){
+ const days=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+ const targetIdx=days.indexOf(weekdayName);
+ const today=new Date();
+ const diff=targetIdx-today.getDay();
+ const d=new Date(today);
+ d.setDate(today.getDate()+diff);
+ return d.toISOString().slice(0,10);
+}
+function renderFitnessFlow(){
+ const tabs=document.getElementById("fitnessTabs"),root=document.getElementById("fitnessDayEditor");
+ if(!tabs||!root)return;
+ tabs.innerHTML=fitDays.map(d=>`<button class="day-tab ${d===activeFitDay?"on":""}" onclick="activeFitDay='${d}';renderFitnessFlow()">${d.slice(0,3)}</button>`).join("");
+ const v=getFitness()[activeFitDay]||"";
+ const ideas=getMovements();
+ const ideaOptions=ideas.length
+   ? `<option value="">— or choose from your ideas —</option>${ideas.map(x=>`<option value="${escAttr(x.name)}">${esc(x.name)} (${esc(x.energy)})</option>`).join("")}`
+   : `<option value="">Add ideas in Your Movement Ideas above</option>`;
+ root.innerHTML=`<div class="meal-row"><label>${activeFitDay}</label><input id="fitDayInput" value="${escAttr(v)}" placeholder="Strength, yoga, dance, rest..."><button onclick="saveFitnessDay()">Save</button></div>
+ <div style="margin-top:8px"><select id="fitDayIdeaPicker" onchange="if(this.value)document.getElementById('fitDayInput').value=this.value" style="font-size:11px;padding:6px;border-radius:8px;border:1px solid #C98685;background:transparent">${ideaOptions}</select></div>
+ <p id="fitnessSaveConfirm" style="font-size:11px;color:#C16B62;margin-top:8px;min-height:14px;opacity:0;transition:opacity .3s"></p>`;
+ const r=jget("sle-fitness-reflection",{});
+ if(document.getElementById("fitnessReflection"))fitnessReflection.value=r.text||""
+}
 function saveFitnessDay(){
  let d=getFitness();d[activeFitDay]=fitDayInput.value.trim();jset("sle-fitness-flow",d);
  let logs=jget("sle-body-daily-activity",[]);
- const today=new Date().toISOString().slice(0,10);
+ const dateForDay=getDateForWeekday(activeFitDay);
  const text=fitDayInput.value.trim();
  if(text){
-   const existing=logs.find(x=>x.date===today&&x.type==="movement-plan");
+   const existing=logs.find(x=>x.date===dateForDay&&x.type==="movement-plan");
    if(existing)existing.note=text;
-   else logs.push({id:String(Date.now()),date:today,type:"movement-plan",note:text});
-   jset("sle-body-daily-activity",logs);
+   else logs.push({id:String(Date.now()),date:dateForDay,type:"movement-plan",note:text});
+ } else {
+   logs=logs.filter(x=>!(x.date===dateForDay&&x.type==="movement-plan"));
  }
+ jset("sle-body-daily-activity",logs);
  renderFitnessFlow();
+ const confirm=document.getElementById("fitnessSaveConfirm");
+ if(confirm){confirm.textContent="Saved to your rhythm.";confirm.style.opacity="1"}
 }
 function saveFitnessReflection(){jset("sle-fitness-reflection",{text:fitnessReflection.value});alert("Reflection saved.")}
 
@@ -2632,23 +2770,28 @@ function renderBodyVisuals(){
 function renderMoneyVisuals(){
  const root=document.getElementById("moneyVisualReview");if(!root)return;
  const budget=getBudget(),funds=getFunds(),biz=getBiz(),household=getHouseExpenses(),receipts=getReceipts();
- const income=budget.filter(x=>x.type==="Income").reduce((s,x)=>s+Number(x.amount||0),0),expenses=budget.filter(x=>x.type==="Expense").reduce((s,x)=>s+Number(x.amount||0),0),remaining=income-expenses;
+ const income=budget.filter(x=>x.type==="Income").reduce((s,x)=>s+Number(x.amount||0),0),expenses=budget.filter(x=>x.type==="Expense").reduce((s,x)=>s+Number(x.amount||0),0);
  const bizIncome=biz.filter(x=>x.type==="Income").reduce((s,x)=>s+Number(x.amount||0),0),bizExp=biz.filter(x=>x.type==="Expense").reduce((s,x)=>s+Number(x.amount||0),0);
  const pendingHouse=household.filter(x=>x.status!=="Paid").reduce((s,x)=>s+Number(x.amount||0),0),pendingReimb=receipts.filter(x=>x.status==="Pending reimbursement").reduce((s,x)=>s+Number(x.amount||0),0);
  const target=funds.reduce((s,x)=>s+Number(x.target||0),0),current=funds.reduce((s,x)=>s+Number(x.current||0),0);
- root.innerHTML=`<div class="visual-review-head"><div><div class="eyebrow">Visual Review</div><h3>Your Money, in Motion</h3></div><p>See what is flowing in, what is being stewarded, what is still upcoming, and what your money is helping you build.</p></div>
+ // "Remaining" used to only reflect the Everyday Budget ledger, which
+ // meant unpaid household bills and a business loss were invisible to
+ // the one number meant to be your actual bottom line. This now folds
+ // in every ledger that represents real money moving.
+ const remaining=(income+bizIncome)-(expenses+bizExp+pendingHouse);
+ root.innerHTML=`<div class="visual-review-head"><div><div class="eyebrow">01 · Your Overview</div><h3>Your Money, in Motion</h3></div><p>See what is flowing in, what is being stewarded, what is still upcoming, and what your money is helping you build.</p></div>
  <div class="visual-grid">
- <div class="visual-card wide"><h4>Money Flow</h4><div class="money-flow"><div class="flow-step"><b>${money(income)}</b><span>Income</span></div><div class="flow-step"><b>${money(expenses)}</b><span>Expenses</span></div><div class="flow-step"><b>${money(Math.max(0,remaining))}</b><span>Remaining</span></div><div class="flow-step"><b>${money(current)}</b><span>Dream Funds</span></div></div></div>
+ <div class="visual-card wide"><h4>Money Flow</h4><div class="money-flow"><div class="flow-step"><b>${money(income+bizIncome)}</b><span>Income</span></div><div class="flow-step"><b>${money(expenses+bizExp+pendingHouse)}</b><span>Expenses + Bills</span></div><div class="flow-step"><b>${money(Math.max(0,remaining))}</b><span>Remaining</span></div><div class="flow-step"><b>${money(current)}</b><span>Dream Funds</span></div></div></div>
  <div class="visual-card"><h4>Dreams Funded</h4><div class="donut" style="background:conic-gradient(var(--terra) ${pct(current,target)}%,#F5E1DE 0)"><div class="donut-center">${pct(current,target)}%<small>funded</small></div></div></div>
  <div class="visual-card"><h4>Upcoming Home Costs</h4><div class="big-number">${money(pendingHouse)}<small>still upcoming</small></div></div>
  <div class="visual-card"><h4>Business Pulse</h4><div class="big-number">${money(bizIncome-bizExp)}<small>current net</small></div><p>${money(bizIncome)} revenue tracked.</p></div>
  <div class="visual-card"><h4>Money Returning</h4><div class="big-number">${money(pendingReimb)}<small>pending reimbursement</small></div></div>
  <div class="visual-card wide"><h4>Dream Fund Landscape</h4><div class="bloom-list">${funds.length?funds.map(f=>`<div class="bloom-row"><span>${esc(f.name)}</span><strong>${pct(f.current,f.target)}% · ${money(f.current)}</strong></div>`).join(""):"<p>No dream funds yet.</p>"}</div></div>
- <div class="visual-card wide"><h4>This month's story</h4><div class="visual-note">${remaining>=0?`You currently have ${money(remaining)} left after the budgeted expenses you've entered.`:`Your entered expenses are currently ${money(Math.abs(remaining))} above your entered income.`}</div></div></div>`;
+ <div class="visual-card wide"><h4>This month's story</h4><div class="visual-note">${remaining>=0?`Across your Everyday Budget, Business Ledger, and unpaid Household Bills, you currently have ${money(remaining)} left.`:`Across your Everyday Budget, Business Ledger, and unpaid Household Bills, you're currently ${money(Math.abs(remaining))} short of covering what's tracked.`}</div></div></div>`;
 }
 
 const refreshPairs=[
-["addCareerPlan","purpose"],["toggleCareerPlan","purpose"],["editCareerPlan","purpose"],["deleteCareerPlan","purpose"],["addBrag","purpose"],["editBrag","purpose"],["deleteBrag","purpose"],["addDreamClient","purpose"],["addBrandItem","purpose"],["deleteBrandItem","purpose"],["addWorkspaceInspo","purpose"],["deleteInspo","purpose"],
+["addCareerPlan","purpose"],["toggleCareerPlan","purpose"],["editCareerPlan","purpose"],["deleteCareerPlan","purpose"],["addVisionTask","purpose"],["addBrag","purpose"],["editBrag","purpose"],["deleteBrag","purpose"],["addDreamClient","purpose"],["addBrandItem","purpose"],["deleteBrandItem","purpose"],["addWorkspaceInspo","purpose"],["deleteInspo","purpose"],
 ["addGroceryItem","home"],["toggleGrocery","home"],["deleteGrocery","home"],["addRhythm","home"],["toggleRhythm","home"],["deleteRhythm","home"],["addActivity","home"],["deleteActivity","home"],["addRitual","home"],["deleteRitual","home"],["saveEvent","home"],["deleteCurrentEvent","home"],
 ["addMovement","body"],["deleteMovement","body"],["saveFitnessDay","body"],["addBreakthrough","body"],["deleteBreakthrough","body"],["addStretch","body"],["deleteStretch","body"],["addVibe","body"],["deleteVibe","body"],["addAffirmation","body"],["deleteAff","body"],
 ["addBudgetItem","money"],["editBudgetItem","money"],["deleteBudgetItem","money"],["addReceipt","money"],["deleteReceipt","money"],["addFund","money"],["editFund","money"],["deleteFund","money"],["addBizEntry","money"],["deleteBizEntry","money"],["addHouseExpense","money"],["toggleHousePaid","money"],["deleteHouseExpense","money"]
@@ -2733,6 +2876,30 @@ function addHook(){if(!hookText.value.trim())return;let a=ccGet("cc-hooks");a.un
 function addVisual(){if(!visualTitle.value.trim())return;let a=ccGet("cc-visuals");a.unshift({id:ccId(),title:visualTitle.value.trim(),link:visualLink.value.trim(),note:visualNote.value.trim()});visualTitle.value=visualLink.value=visualNote.value="";ccSet("cc-visuals",a)}
 function addCross(){if(!crossTheme.value.trim())return;let a=ccGet("cc-cross");a.unshift({id:ccId(),theme:crossTheme.value.trim(),teach:crossTeach.value.trim(),live:crossLive.value.trim(),reflect:crossReflect.value.trim()});crossTheme.value=crossTeach.value=crossLive.value=crossReflect.value="";ccSet("cc-cross",a)}
 function addIdea(){if(!ideaTitle.value.trim())return;let a=ccGet("cc-ideas");a.unshift({id:ccId(),title:ideaTitle.value.trim(),platform:ideaPlatform.value,status:ideaStatus.value,season:ideaSeason.value.trim(),note:ideaNote.value.trim(),date:""});ideaTitle.value=ideaSeason.value=ideaNote.value="";ccSet("cc-ideas",a)}
+function sendToStudio(sourceKey,sourceId,mapper){
+ const items=ccGet(sourceKey);
+ const item=items.find(x=>x.id===sourceId);
+ if(!item)return;
+ const newIdea=mapper(item);
+ let ideas=ccGet("cc-ideas");
+ ideas.unshift({id:ccId(),status:"Draft",date:"",...newIdea});
+ ccSet("cc-ideas",ideas);
+ // The confirmation banner lives inside Creative Command Center's own
+ // page, so it's only visible if that's where this was triggered from.
+ // Triggered elsewhere (e.g. Integration Lounge), fall back to an
+ // alert so there's still real feedback that it worked.
+ const onCreatorPage=document.getElementById("creatorPage")?.classList.contains("active");
+ if(onCreatorPage){
+   const el=document.getElementById("studioSendConfirm");
+   if(el){el.textContent=`"${newIdea.title}" sent to Production Studio.`;el.style.opacity="1";setTimeout(()=>{if(el)el.style.opacity="0"},2500)}
+ } else {
+   alert(`"${newIdea.title}" sent to Production Studio — find it in Creative Command Center.`);
+ }
+}
+function scriptToStudio(id){sendToStudio("cc-scripts",id,x=>({title:x.title,platform:x.platform||"",note:x.text||""}))}
+function videoToStudio(id){sendToStudio("cc-videos",id,x=>({title:x.title,platform:"",note:`Hook: ${x.hook||"—"}\nDrop: ${x.drop||"—"}\nAction: ${x.action||"—"}`}))}
+function longToStudio(id){sendToStudio("cc-long",id,x=>({title:x.title,platform:"",note:x.text||""}))}
+function remixToStudio(id){sendToStudio("cc-remix",id,x=>({title:"Remix: "+(x.trend||"Untitled trend"),platform:"",note:x.idea||""}))}
 function moveIdea(id,status){let a=ccGet("cc-ideas"),x=a.find(v=>v.id===id);if(x)x.status=status;ccSet("cc-ideas",a)}
 function addScript(){if(!scriptTitle.value.trim())return;let a=ccGet("cc-scripts");a.unshift({id:ccId(),title:scriptTitle.value.trim(),platform:scriptPlatform.value,text:scriptText.value.trim()});scriptTitle.value=scriptText.value="";ccSet("cc-scripts",a)}
 function addVideo(){if(!videoTitle.value.trim())return;let a=ccGet("cc-videos");a.unshift({id:ccId(),title:videoTitle.value.trim(),hook:videoHook.value.trim(),drop:videoDrop.value.trim(),action:videoAction.value.trim(),state:videoState.value,audio:videoAudio.value.trim()});videoTitle.value=videoHook.value=videoDrop.value=videoAction.value=videoAudio.value="";ccSet("cc-videos",a)}
@@ -2743,8 +2910,18 @@ function toggleEngage(id){let a=ccGet("cc-engage"),x=a.find(v=>v.id===id);if(x)x
 function addAnalytics(){if(!analyticTitle.value.trim())return;let a=ccGet("cc-analytics");a.unshift({id:ccId(),title:analyticTitle.value.trim(),platform:analyticPlatform.value,reach:Number(analyticReach.value||0),eng:Number(analyticEng.value||0),why:analyticWhy.value.trim()});analyticTitle.value=analyticReach.value=analyticEng.value=analyticWhy.value="";ccSet("cc-analytics",a)}
 
 const editChecks=["Branded intro/outro added","Text overlays legible","Audio balanced + captioned","Visuals match aesthetic","CTA included","Caption finalized","Hashtags / keywords added","Cover image ready","Scheduled / queued"];
-function getChecks(){return ccGet("cc-checks",editChecks.map((t,i)=>({id:"c"+i,text:t,done:false})))}
-function toggleCheck(id){let a=getChecks(),x=a.find(v=>v.id===id);if(x)x.done=!x.done;localStorage.setItem("cc-checks",JSON.stringify(a));renderCreator()}
+function getItemChecks(item){
+ if(!item.checks)item.checks=editChecks.map(t=>({text:t,done:false}));
+ return item.checks;
+}
+function toggleItemCheck(ideaId,idx){
+ let ideas=ccGet("cc-ideas");
+ let item=ideas.find(x=>x.id===ideaId);
+ if(!item)return;
+ const checks=getItemChecks(item);
+ checks[idx].done=!checks[idx].done;
+ ccSet("cc-ideas",ideas);
+}
 
 let ccCursor=new Date();ccCursor.setDate(1);
 function ccChangeMonth(n){ccCursor.setMonth(ccCursor.getMonth()+n);renderCCCalendar()}
@@ -2768,12 +2945,23 @@ function renderCreator(){
  const statuses=["Idea","Draft","In Production","Final Edit","Ready"];
  creatorPipeline.innerHTML=statuses.map(s=>`<div class="pipe-col"><h4>${s}</h4>${ideas.filter(x=>x.status===s).map(x=>`<div class="pipe-card"><b>${esc(x.title)}</b><div>${esc(x.platform)}</div><div class="actions"><button onclick="scheduleIdea('${x.id}')">${s==="Ready"?"Schedule":"Move / Date"}</button><button onclick="ccEdit('cc-ideas','${x.id}','title','Edit idea:')">Edit</button><button onclick="ccDelete('cc-ideas','${x.id}')">×</button></div></div>`).join("")||`<span style="font-size:8px;color:#a98a86">Open</span>`}</div>`).join("");
 
- renderList("scriptList","cc-scripts",x=>`<div class="cc-item"><b>${esc(x.title)}</b><div class="meta">${esc(x.platform)}</div><p>${esc(x.text||"")}</p><div class="actions"><button onclick="ccEdit('cc-scripts','${x.id}','text','Edit draft:')">Edit</button><button onclick="ccDelete('cc-scripts','${x.id}')">Delete</button></div></div>`);
- renderList("videoList","cc-videos",x=>`<div class="cc-item"><b>${esc(x.title)}</b><div class="meta">${esc(x.state)}</div><p>Hook: ${esc(x.hook||"—")}<br>Drop: ${esc(x.drop||"—")}<br>Action: ${esc(x.action||"—")}</p><div class="actions"><button onclick="ccEdit('cc-videos','${x.id}','title','Edit concept:')">Edit</button><button onclick="ccDelete('cc-videos','${x.id}')">Delete</button></div></div>`);
- renderList("longList","cc-long",x=>`<div class="cc-item"><b>${esc(x.title)}</b><div class="meta">${esc(x.type)}</div><p>${esc(x.text||"")}</p><div class="actions"><button onclick="ccEdit('cc-long','${x.id}','text','Edit draft:')">Edit</button><button onclick="ccDelete('cc-long','${x.id}')">Delete</button></div></div>`);
- renderList("remixList","cc-remix",x=>`<div class="cc-item"><b>${esc(x.trend)}</b><div class="meta">${esc(x.date||"")} ${x.link?`· ${esc(x.link)}`:""}</div><p>${esc(x.idea||"")}</p><div class="actions"><button onclick="ccEdit('cc-remix','${x.id}','idea','Edit remix:')">Edit</button><button onclick="ccDelete('cc-remix','${x.id}')">Delete</button></div></div>`);
+ renderList("scriptList","cc-scripts",x=>`<div class="cc-item"><b>${esc(x.title)}</b><div class="meta">${esc(x.platform)}</div><p>${esc(x.text||"")}</p><div class="actions"><button onclick="scriptToStudio('${x.id}')">→ Send to Studio</button><button onclick="ccEdit('cc-scripts','${x.id}','text','Edit draft:')">Edit</button><button onclick="ccDelete('cc-scripts','${x.id}')">Delete</button></div></div>`);
+ renderList("videoList","cc-videos",x=>`<div class="cc-item"><b>${esc(x.title)}</b><div class="meta">${esc(x.state)}</div><p>Hook: ${esc(x.hook||"—")}<br>Drop: ${esc(x.drop||"—")}<br>Action: ${esc(x.action||"—")}</p><div class="actions"><button onclick="videoToStudio('${x.id}')">→ Send to Studio</button><button onclick="ccEdit('cc-videos','${x.id}','title','Edit concept:')">Edit</button><button onclick="ccDelete('cc-videos','${x.id}')">Delete</button></div></div>`);
+ renderList("longList","cc-long",x=>`<div class="cc-item"><b>${esc(x.title)}</b><div class="meta">${esc(x.type)}</div><p>${esc(x.text||"")}</p><div class="actions"><button onclick="longToStudio('${x.id}')">→ Send to Studio</button><button onclick="ccEdit('cc-long','${x.id}','text','Edit draft:')">Edit</button><button onclick="ccDelete('cc-long','${x.id}')">Delete</button></div></div>`);
+ renderList("remixList","cc-remix",x=>`<div class="cc-item"><b>${esc(x.trend)}</b><div class="meta">${esc(x.date||"")} ${x.link?`· ${esc(x.link)}`:""}</div><p>${esc(x.idea||"")}</p><div class="actions"><button onclick="remixToStudio('${x.id}')">→ Send to Studio</button><button onclick="ccEdit('cc-remix','${x.id}','idea','Edit remix:')">Edit</button><button onclick="ccDelete('cc-remix','${x.id}')">Delete</button></div></div>`);
 
- editChecklist.innerHTML=getChecks().map(x=>`<label class="check-row"><input type="checkbox" ${x.done?"checked":""} onchange="toggleCheck('${x.id}')"> ${esc(x.text)}</label>`).join("");
+ const finalEditItems=ideas.filter(x=>x.status==="Final Edit");
+ editChecklist.innerHTML=finalEditItems.length
+   ? finalEditItems.map(item=>{
+       const checks=getItemChecks(item);
+       const allDone=checks.every(c=>c.done);
+       return `<div class="polish-card" style="margin-bottom:14px;padding:14px;border:1px solid var(--line);border-radius:16px">
+         <b>${esc(item.title)}</b>
+         <div class="check-grid" style="margin-top:8px">${checks.map((c,i)=>`<label class="check-row"><input type="checkbox" ${c.done?"checked":""} onchange="toggleItemCheck('${item.id}',${i})"> ${esc(c.text)}</label>`).join("")}</div>
+         <button class="pill" style="margin-top:10px" ${allDone?"":"disabled"} onclick="moveIdea('${item.id}','Ready')">${allDone?"Mark Ready":"Finish checklist first"}</button>
+       </div>`;
+     }).join("")
+   : `<p style="font-size:9px;color:#a27e79">Nothing is in Final Edit right now — move something there from Production Studio when it's ready for a quality pass.</p>`;
 
  const ready=ideas.filter(x=>x.status==="Ready");
  readyList.innerHTML=ready.length?ready.map(x=>`<div class="cc-item"><b>${esc(x.title)}</b><div class="meta">${esc(x.platform)} ${x.date?`· ${esc(x.date)}`:"· Not scheduled"}</div><div class="actions"><button onclick="scheduleIdea('${x.id}')">Set Date</button><button onclick="moveIdea('${x.id}','Final Edit')">Back to Edit</button></div></div>`).join(""):`<p style="font-size:9px;color:#a27e79">Nothing is ready for posting yet.</p>`;
@@ -2848,6 +3036,8 @@ function addBloom(){
  let a=ilGet("il-bloom");a.unshift({id:ilId(),title:bloomTitle.value.trim()||"Untitled download",type:bloomType.value,note:bloomNote.value.trim(),state:bloomState.value,audio:ilAudio.bloom,date:new Date().toISOString().slice(0,10)});bloomTitle.value=bloomNote.value="";ilAudio.bloom="";ilSet("il-bloom",a)
 }
 function setBloomState(id,state){let a=ilGet("il-bloom"),x=a.find(v=>v.id===id);if(x)x.state=state;ilSet("il-bloom",a)}
+function brainToStudio(id){sendToStudio("il-brain",id,x=>({title:x.text,platform:"",note:"From Brain Dump"}))}
+function bloomToStudio(id){sendToStudio("il-bloom",id,x=>({title:x.title,platform:"",note:x.note||""}))}
 
 const seasons=["Q1 · Winter / Beginning","Q2 · Spring / Expansion","Q3 · Summer / Expression","Q4 · Autumn / Integration"];
 function getSeasons(){return ilGet("il-seasons",seasons.map((name,i)=>({id:"s"+i,name,text:""})))}
@@ -2862,12 +3052,12 @@ function renderIntegration(){
  const pulse=document.getElementById("integrationPulse");if(!pulse)return;
  pulse.innerHTML=`<div class="integration-stat"><b>${brain.length}</b><small>Thoughts Unloaded</small></div><div class="integration-stat"><b>${mental.length}</b><small>Clearing Sessions</small></div><div class="integration-stat"><b>${bloom.filter(x=>x.state==="Ready to Bloom").length}</b><small>Ready to Bloom</small></div><div class="integration-stat"><b>${library.length}</b><small>Resources Saved</small></div>`;
 
- brainDumpCloud.innerHTML=brain.length?brain.map(x=>`<div class="brain-chip"><b>${esc(x.text)}</b><div class="meta">${esc(x.tag)} · ${esc(x.date||"")}</div>${x.audio?`<audio class="il-audio" controls src="${x.audio}"></audio>`:""}<div class="actions"><button onclick="ilEdit('il-brain','${x.id}','text','Edit thought:')">Edit</button><button onclick="ilDelete('il-brain','${x.id}')">Delete</button></div></div>`).join(""):`<div class="brain-chip"><b>Your mind can rest here.</b><div class="meta">Nothing to organize yet.</div></div>`;
+ brainDumpCloud.innerHTML=brain.length?brain.map(x=>`<div class="brain-chip"><b>${esc(x.text)}</b><div class="meta">${esc(x.tag)} · ${esc(x.date||"")}</div>${x.audio?`<audio class="il-audio" controls src="${x.audio}"></audio>`:""}<div class="actions">${x.tag==="Creative"?`<button onclick="brainToStudio('${x.id}')">→ Send to Studio</button>`:""}<button onclick="ilEdit('il-brain','${x.id}','text','Edit thought:')">Edit</button><button onclick="ilDelete('il-brain','${x.id}')">Delete</button></div></div>`).join(""):`<div class="brain-chip"><b>Your mind can rest here.</b><div class="meta">Nothing to organize yet.</div></div>`;
 
  mentalHistory.innerHTML=mental.slice(0,6).map(x=>`<div class="cc-item"><b>${esc(x.label)}</b><div class="meta">${esc(x.date)}</div><p>${esc(x.text)}</p>${x.audio?`<audio class="il-audio" controls src="${x.audio}"></audio>`:""}<div class="actions"><button onclick="ilDelete('il-mental','${x.id}')">Delete</button></div></div>`).join("");
  overwhelmPrompt.textContent=overwhelmPrompts[overwhelmIndex];
 
- bloomGarden.innerHTML=bloom.length?bloom.map(x=>`<div class="seed ${x.state==="Ready to Bloom"?"ready":""}"><span class="tag">${esc(x.type)} · ${esc(x.state)}</span><h4>${esc(x.title)}</h4><p>${esc(x.note||"")}</p>${x.audio?`<audio class="il-audio" controls src="${x.audio}"></audio>`:""}<div class="actions"><button onclick="setBloomState('${x.id}','Ready to Bloom')">🌼 Ready</button><button onclick="ilEdit('il-bloom','${x.id}','title','Edit idea:')">Edit</button><button onclick="ilDelete('il-bloom','${x.id}')">Delete</button></div></div>`).join(""):`<div class="seed"><h4>Plant something here.</h4><p>Ideas do not have to become obligations today.</p></div>`;
+ bloomGarden.innerHTML=bloom.length?bloom.map(x=>`<div class="seed ${x.state==="Ready to Bloom"?"ready":""}"><span class="tag">${esc(x.type)} · ${esc(x.state)}</span><h4>${esc(x.title)}</h4><p>${esc(x.note||"")}</p>${x.audio?`<audio class="il-audio" controls src="${x.audio}"></audio>`:""}<div class="actions">${x.state==="Ready to Bloom"?`<button onclick="bloomToStudio('${x.id}')">→ Send to Studio</button>`:`<button onclick="setBloomState('${x.id}','Ready to Bloom')">🌼 Ready</button>`}<button onclick="ilEdit('il-bloom','${x.id}','title','Edit idea:')">Edit</button><button onclick="ilDelete('il-bloom','${x.id}')">Delete</button></div></div>`).join(""):`<div class="seed"><h4>Plant something here.</h4><p>Ideas do not have to become obligations today.</p></div>`;
 
  const currentQ=Math.floor(new Date().getMonth()/3);
  seasonBoard.innerHTML=getSeasons().map((x,i)=>`<div class="season ${i===currentQ?"active-season":""}"><h4>${esc(x.name)}</h4><textarea placeholder="Cultivate · protect · experience · release..." onblur="saveSeason('${x.id}',this.value)">${esc(x.text||"")}</textarea></div>`).join("");
@@ -2882,10 +3072,23 @@ function bSet(k,v){spaceStorageSet(k,v,renderBecoming)}
 function bId(){return String(Date.now())+Math.random().toString(16).slice(2)}
 function bDelete(k,id){if(!confirm("Delete this entry?"))return;bSet(k,bGet(k).filter(x=>x.id!==id))}
 function bEdit(k,id,field,label){let a=bGet(k),x=a.find(v=>v.id===id);if(!x)return;let v=prompt(label,x[field]||"");if(v!==null&&v.trim()){x[field]=v.trim();bSet(k,a)}}
-function saveIdentityBridge(){localStorage.setItem("becoming-identity",JSON.stringify({before:identityBefore.value,after:identityAfter.value}));renderBecoming()}
+function saveIdentityBridge(){
+ localStorage.setItem("becoming-identity",JSON.stringify({before:identityBefore.value,after:identityAfter.value}));
+ renderBecoming();
+ const el=document.getElementById("identityConfirm");
+ if(el){el.textContent="Saved.";el.style.opacity="1"}
+}
 function addTransformation(){if(!transformTitle.value.trim())return;let a=bGet("becoming-transform");a.unshift({id:bId(),title:transformTitle.value.trim(),date:transformDate.value||new Date().toISOString().slice(0,10),note:transformNote.value.trim()});transformTitle.value=transformDate.value=transformNote.value="";bSet("becoming-transform",a)}
 function addRelease(){if(!releasePattern.value.trim())return;let a=bGet("becoming-release");a.unshift({id:bId(),pattern:releasePattern.value.trim(),origin:releaseOrigin.value.trim(),served:releaseServed.value.trim(),statement:releaseStatement.value.trim(),date:releaseDate.value,symbol:releaseSymbol.value.trim()});releasePattern.value=releaseOrigin.value=releaseServed.value=releaseStatement.value=releaseDate.value=releaseSymbol.value="";bSet("becoming-release",a)}
 function addGrowth(){if(!growthTitle.value.trim())return;let a=bGet("becoming-growth");a.unshift({id:bId(),title:growthTitle.value.trim(),mindset:growthMindset.value.trim(),area:growthArea.value,tender:growthTender.value.trim(),gentle:growthGentle.value.trim()});growthTitle.value=growthMindset.value=growthTender.value=growthGentle.value="";bSet("becoming-growth",a)}
+function releaseToGrowth(id){
+ const releases=bGet("becoming-release");
+ const item=releases.find(x=>x.id===id);
+ if(!item)return;
+ let growth=bGet("becoming-growth");
+ growth.unshift({id:bId(),title:item.statement||("Growing beyond: "+item.pattern),mindset:"",area:"Self",tender:"",gentle:""});
+ bSet("becoming-growth",growth);
+}
 let becomingRecorder=null,becomingChunks=[],becomingAudio="";
 async function toggleBecomingAudio(){
  const btn=document.getElementById("winRecordBtn");
@@ -2901,7 +3104,7 @@ function renderBecoming(){
  pulse.innerHTML=`<div class="becoming-stat"><b>${trans.length}</b><small>Transformation Moments</small></div><div class="becoming-stat"><b>${rel.length}</b><small>Patterns Releasing</small></div><div class="becoming-stat"><b>${growth.length}</b><small>Growth Edges</small></div><div class="becoming-stat"><b>${wins.length}</b><small>Wins + Wisdom</small></div>`;
  const ident=JSON.parse(localStorage.getItem("becoming-identity")||"{}");identityBefore.value=ident.before||"";identityAfter.value=ident.after||"";
  transformTimeline.innerHTML=trans.length?trans.map(x=>`<div class="transform-item"><h4>${esc(x.title)}</h4><p>${esc(x.date||"")} ${x.note?`· ${esc(x.note)}`:""}</p><div class="actions"><button onclick="bEdit('becoming-transform','${x.id}','note','Edit reflection:')">Edit</button><button onclick="bDelete('becoming-transform','${x.id}')">Delete</button></div></div>`).join(""):`<p style="font-size:9px;color:#a17d78">Your transformation timeline begins with the first moment you decide is worth witnessing.</p>`;
- releaseWall.innerHTML=rel.length?rel.map(x=>`<div class="release-card"><h4>${esc(x.pattern)}</h4><p>${x.origin?`Origin: ${esc(x.origin)}<br>`:""}${x.served?`How it served me: ${esc(x.served)}`:""}</p><div class="release-statement">${esc(x.statement||"")}</div>${x.symbol?`<p>${esc(x.symbol)}</p>`:""}<div class="actions"><button onclick="bEdit('becoming-release','${x.id}','statement','Edit release statement:')">Edit</button><button onclick="bDelete('becoming-release','${x.id}')">Delete</button></div></div>`).join(""):`<div class="release-card"><h4>Nothing to force.</h4><p>When a pattern becomes ready to be named, it can live here.</p></div>`;
+ releaseWall.innerHTML=rel.length?rel.map(x=>`<div class="release-card"><h4>${esc(x.pattern)}</h4><p>${x.origin?`Origin: ${esc(x.origin)}<br>`:""}${x.served?`How it served me: ${esc(x.served)}`:""}</p><div class="release-statement">${esc(x.statement||"")}</div>${x.symbol?`<p>${esc(x.symbol)}</p>`:""}<div class="actions"><button onclick="releaseToGrowth('${x.id}')">→ Turn Into a Growth Edge</button><button onclick="bEdit('becoming-release','${x.id}','statement','Edit release statement:')">Edit</button><button onclick="bDelete('becoming-release','${x.id}')">Delete</button></div></div>`).join(""):`<div class="release-card"><h4>Nothing to force.</h4><p>When a pattern becomes ready to be named, it can live here.</p></div>`;
  growthGarden.innerHTML=growth.length?growth.map(x=>`<div class="growth-card"><div class="eyebrow">${esc(x.area)}</div><h4>${esc(x.title)}</h4><p>${x.mindset?`Supportive belief: ${esc(x.mindset)}<br>`:""}${x.tender?`What feels new: ${esc(x.tender)}<br>`:""}${x.gentle?`Gentle practice: ${esc(x.gentle)}`:""}</p><div class="actions"><button onclick="bEdit('becoming-growth','${x.id}','gentle','Edit gentle practice:')">Edit</button><button onclick="bDelete('becoming-growth','${x.id}')">Delete</button></div></div>`).join(""):`<div class="growth-card"><h4>A growth edge will appear here.</h4><p>Witnessing is enough. Nothing needs to be completed.</p></div>`;
  victoryGrid.innerHTML=wins.length?wins.map(x=>`<div class="victory-card"><div class="win">${esc(x.title)}</div><div class="meta">${esc(x.date||"")}</div><div class="wisdom">${esc(x.wisdom||"")}</div>${x.source?`<p>${esc(x.source)}</p>`:""}${x.audio?`<audio class="il-audio" controls src="${x.audio}"></audio>`:""}<div class="actions"><button onclick="bEdit('becoming-wins','${x.id}','wisdom','Edit wisdom:')">Edit</button><button onclick="bDelete('becoming-wins','${x.id}')">Delete</button></div></div>`).join(""):`<div class="victory-card"><div class="win">Your victory vault is waiting for proof of how far you’ve come.</div></div>`;
 }
@@ -3057,7 +3260,13 @@ function openSpace(id){
   if(s.legacy==="map"){
     if(map)map.style.display="block";
     renderMapRooms();
-    if(typeof openRoom==="function")setTimeout(()=>openRoom(s.room),0);
+    // Entering a specific room from outside the map (My Spaces, Today)
+    // should land you only in that room — the atlas and the other 3
+    // rooms are for browsing the map itself, not something you see
+    // every time you ask for one specific area.
+    document.getElementById("map").style.display="none";
+    document.getElementById("rooms").style.display="none";
+    if(typeof openRoom==="function")openRoom(s.room);
   } else {
     const el=document.getElementById(s.legacy+"Page");
     if(el)el.classList.add("active");
@@ -3300,7 +3509,12 @@ function saveDailyGuide(){
  localStorage.setItem("sle-guide-response-"+day,record.reflection);
  localStorage.setItem("sle-guide-complete-"+day,"yes");
  updateTodaySaveStatus();
- showShellPage("today");
+ const confirm=document.getElementById("saveReflectionConfirm");
+ if(confirm){
+   confirm.textContent="Saved. Carry this with you today.";
+   confirm.style.opacity="1";
+ }
+ setTimeout(()=>showShellPage("today"),1200);
 }
 function playDailyGuideAudio(btn){
  btn.textContent=btn.textContent==="▶"?"Ⅱ":"▶";
