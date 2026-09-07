@@ -33,9 +33,10 @@ export default async function FlowPage() {
         <Link href="/today" className="text-xs text-terra">
           ← Back to Today
         </Link>
-        <h1 className="font-display text-5xl mt-4 mb-2">Stay in Flow</h1>
+        <h1 className="font-display text-5xl mt-4 mb-2">Move with what matters.</h1>
         <p className="text-sm text-ink/70 mb-10">
-          Not a to-do list — a place to hold what actually matters right now, and let it move as it changes.
+          This is not a hustle board. It is a living weekly landscape for what deserves your energy now, what is
+          outside your control, what has been completed, and what you want to remember with gratitude.
         </p>
         <FlowBoard userId={user!.id} initial={initial} />
       </div>
