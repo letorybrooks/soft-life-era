@@ -3285,8 +3285,9 @@ function saveDailyGuide(){
  const feeling=localStorage.getItem("sle-today-feeling-"+day)||localStorage.getItem("sle-today-feeling")||"";
  const actions=[...document.querySelectorAll('[data-feeling-action]')].map((el,i)=>({
    index:i,
-   text:el.parentElement?.innerText?.trim()||"",
-   done:el.checked
+   text:el.parentElement?.querySelector('span')?.innerText?.trim()||"",
+   done:el.checked,
+   note:document.querySelector(`[data-feeling-note="${i}"]`)?.value?.trim()||""
  }));
  const record={
    date:day,
@@ -3326,7 +3327,7 @@ function injectMicroActions(feeling){
  if(!reflect||!g.length)return;
  const box=document.createElement("div");
  box.id="dailyMicroActions";
- box.innerHTML=`<div class="eyebrow" style="margin-top:4px">If it supports you</div><h3 style="font-family:Italiana,serif;font-size:27px;font-weight:400;margin:5px 0 2px">Three gentle ways to live this feeling today</h3><p style="font-size:9px;color:#8d6c68;margin:0">Choose one. Choose all three. Choose none. These are invitations, not assignments.</p><div class="path-mini-actions">${g.map((x,i)=>`<label class="path-mini-action"><input type="checkbox" data-feeling-action="${i}"><span>${x}</span></label>`).join("")}</div>`;
+ box.innerHTML=`<div class="eyebrow" style="margin-top:4px">If it supports you</div><h3 style="font-family:Italiana,serif;font-size:27px;font-weight:400;margin:5px 0 2px">Three gentle ways to live this feeling today</h3><p style="font-size:9px;color:#8d6c68;margin:0">Choose one. Choose all three. Choose none. These are invitations, not assignments.</p><div class="path-mini-actions">${g.map((x,i)=>`<label class="path-mini-action" style="flex-direction:column;align-items:stretch"><div style="display:flex;align-items:flex-start;gap:10px"><input type="checkbox" data-feeling-action="${i}" onchange="this.parentElement.nextElementSibling.style.display=this.checked?'block':'none'"><span>${x}</span></div><input type="text" data-feeling-note="${i}" placeholder="Jot it here if you'd like…" style="display:none;margin-top:8px;margin-left:26px;border:0;border-bottom:1px solid #C98685;background:transparent;padding:6px 0;font-size:12px;outline:none"></label>`).join("")}</div>`;
  reflect.parentNode.insertBefore(box,reflect);
 }
 
@@ -3339,7 +3340,14 @@ openDailyGuide=function(feeling){
    const record=JSON.parse(localStorage.getItem("sle-daily-record-"+day)||"null");
    if(record && Array.isArray(record.actions)){
      document.querySelectorAll("[data-feeling-action]").forEach((el,i)=>{
-       if(record.actions[i])el.checked=!!record.actions[i].done;
+       if(record.actions[i]){
+         el.checked=!!record.actions[i].done;
+         const note=document.querySelector(`[data-feeling-note="${i}"]`);
+         if(note){
+           note.value=record.actions[i].note||"";
+           note.style.display=el.checked?"block":"none";
+         }
+       }
      });
    }
  }catch(e){}
