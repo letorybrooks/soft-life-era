@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import FeelingPicker from "./feeling-picker";
+import FlowDigest from "./flow-digest";
 
 export default async function TodayPage() {
   const supabase = await createClient();
@@ -41,6 +42,8 @@ export default async function TodayPage() {
             initialFeeling={checkin?.feeling ?? null}
           />
         </div>
+
+        <FlowDigest userId={user!.id} />
 
         <p className="text-xs text-ink/50 mt-8">
           {profile?.active_spaces?.length
